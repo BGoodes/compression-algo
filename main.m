@@ -13,9 +13,7 @@ nbImage = fileBytes/(width*height + 2*(width/2)*(height/2));
 [compY,compU,compV]=yuv_readimage(fid);
 
 % Apply DCT
-dctY = dct2(compY);
-dctU = dct2(compU);
-dctV = dct2(compY);
+[dctY,dctU,dctV]=apply_transform(compY,compU,compV);
 
 % Display
 figure;
