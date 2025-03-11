@@ -1,22 +1,31 @@
 % Filename
 file = "./media/news.qcif";
+width = 176;
+height = 144;
 
 % Open the file
 fid = fopen(file,'r');
 
-% Load an image in YUV format. To load the next image, apply the function again.
+fileBytes = dir(file).bytes;
+nbImage = fileBytes/(width*height + 2*(width/2)*(height/2));
+
+% Load an image.
 [compY,compU,compV]=yuv_readimage(fid);
 
-% Show components
+% Apply DCT
+dctY = dct2(compY);
+dctU = dct2(compU);
+dctV = dct2(compY);
+
+% Display
 figure;
-subplot(1,3,1);
-imshow(uint8(compY));
+subplot(1, 2, 1);
+imshow(compY, []);
+title('Y Component');
 
-subplot(1,3,2);
-imshow(uint8(compU'));
-
-subplot(1,3,3);
-imshow(uint8(compV'));
+subplot(1, 2, 2);
+imshow(log(abs(dctY) + 1), []);
+title('DCT of Y');
 
 % Close the file
 fclose(fid);
