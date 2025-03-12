@@ -7,7 +7,9 @@ fileBytes = dir(file).bytes;
 nbImage = fileBytes/(width*height + 2*(width/2)*(height/2));
 
 compress(file, "test.mat")
-[decompY, decompU, decompV]=decompress("test.mat");
+[decompY, decompU, deompV]=decompress("test.mat");
+
+compute_compression(file, "test.mat");
 
 % Display
 figure;

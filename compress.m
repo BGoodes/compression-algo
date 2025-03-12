@@ -1,4 +1,4 @@
-function compress(inputFile, outputFile)
+function [qY, qU, qV] = compress(inputFile, outputFile)
     % Load an image
     fid = fopen(inputFile,'r');
     [compY,compU,compV]=yuv_readimage(fid);
