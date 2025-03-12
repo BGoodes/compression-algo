@@ -1,20 +1,21 @@
 function [decompY, decompU, decompV] = decompress(inputFile)
+    run('config.m');
+
+    % Open the file
     fid = fopen(inputFile, 'r');
 
-    % Read the image
-    [qY, qU, qV] = yuv_readimage(fid);
+    for i = 1:NB_FRAME
+        % Read the frame
+        [qY, qU, qV] = yuv_readimage(fid);
 
-    figure;
-    subplot(1, 2, 1);
-    imshow(uint8(qY), []);
-    title('Y Component');
+        % Inverse Transform 
+        decompY = idct2(qY);
+        decompU = idct2(qU);
+        decompV = idct2(qV);
+    end
 
-    subplot(1, 2, 2);
-    imshow(uint8(idct2(qY)), []);
-    title('Y Component');
+    % Close the file
+    fclose(fid);
 
-    % Inverse Transform 
-    decompY = idct2(qY);
-    decompU = idct2(qU);
-    decompV = idct2(qV);
+    disp("Decompression complete.");
 end

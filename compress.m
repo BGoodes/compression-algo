@@ -1,18 +1,23 @@
 function [qY, qU, qV] = compress(inputFile, outputFile)
+    run('config.m');
+
+    % Open the file
     fidIn = fopen(inputFile, 'r');
     fidOut = fopen(outputFile, 'w');
-
-    % Read the image
-    [compY, compU, compV] = yuv_readimage(fidIn);
-
-    % Apply DCT
-    [dctY, dctU, dctV] = apply_transform(compY, compU, compV);
-
-    % Quantization
-    [qY, qU, qV] = apply_quantization(dctY, dctU, dctV);
     
-    % Save bitstream
-    yuv_writeimage(fidOut, qY, qU, qV);
+    for i = 1:NB_FRAME
+        % Read the frame
+        [compY, compU, compV] = yuv_readimage(fidIn);
+
+        % Apply DCT
+        [dctY, dctU, dctV] = apply_transform(compY, compU, compV);
+
+        % Quantization
+        [qY, qU, qV] = apply_quantization(dctY, dctU, dctV);
+        
+        % Write the frame
+        yuv_writeimage(fidOut, qY, qU, qV);
+    end
 
     % Close the file
     fclose(fidIn);

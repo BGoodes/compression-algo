@@ -1,11 +1,9 @@
-% Filename
-inputFile = "./media/news.qcif";
-outputFile = "test.mat";
+run('config.m');
 
-compress(inputFile, outputFile)
-[decompY, decompU, decompV]=decompress(outputFile);
+compress(INPUT_FILE, OUTPUT_FILE)
+[decompY, decompU, decompV]=decompress(OUTPUT_FILE);
 
-compute_compression(inputFile, outputFile);
+compute_compression(INPUT_FILE, OUTPUT_FILE);
 
 % Display
 figure;
