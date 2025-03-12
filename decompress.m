@@ -8,10 +8,11 @@ function [decompY, decompU, decompV] = decompress(inputFile)
         % Read the frame
         [qY, qU, qV] = yuv_readimage(fid);
 
-        % Inverse Transform 
-        decompY = idct2(qY);
-        decompU = idct2(qU);
-        decompV = idct2(qV);
+        % Dequantization
+        [dctY, dctU, dctV] = reverse_quantization(qY, qU, qV);
+
+        % Apply inverse DCT
+        [decompY, decompU, decompV] = reverse_transform(dctY, dctU, dctV);
     end
 
     % Close the file
