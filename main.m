@@ -1,17 +1,13 @@
 % Filename
-file = "./media/news.qcif";
-width = 176;
-height = 144;
+inputFile = "./media/news.qcif";
+outputFile = "test.mat";
 
-fileSize = dir(file).bytes;
-nbImage = fileSize/(width*height + width*height/2);
+compress(inputFile, outputFile)
+[decompY, decompU, decompV]=decompress(outputFile);
 
-compress(file, "test.mat")
-[decompY, decompU, decompV]=decompress("test.mat");
-
-compute_compression(file, "test.mat");
+compute_compression(inputFile, outputFile);
 
 % Display
 figure;
-imshow(decompY, []);
+imshow(uint8(decompY), []);
 title('Y Component');
