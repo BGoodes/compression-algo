@@ -1,3 +1,4 @@
+clear; 
 run('config.m');
 
 compress(INPUT_FILE, OUTPUT_FILE)
@@ -8,4 +9,4 @@ compute_compression(INPUT_FILE, OUTPUT_FILE);
 % Display
 figure;
 imshow(uint8(decompY), []);
-title('Y Component');
+title('Image récupérée du bitstream');

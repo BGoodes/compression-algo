@@ -20,8 +20,4 @@ function [qY, qU, qV] = apply_quantization(dctY, dctU, dctV)
     qU(N+1:end,:) = 0;
     qV(N+1:end,:) = 0;
 
-    % Quantization
-    qY = round(qY ./ Q_LVL);
-    qU = round(qU ./ Q_LVL);
-    qV = round(qV ./ Q_LVL);
 end

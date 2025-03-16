@@ -9,8 +9,8 @@
 
 function [dctY, dctU, dctV] = reverse_quantization(qY, qU, qV)
     run('config.m');
-
-    dctY = qY .* Q_LVL;
-    dctU = qU .* Q_LVL;
-    dctV = qV .* Q_LVL;
+    
+    dctY = qY;
+    dctU = qU;
+    dctV = qV;
 end
