@@ -8,7 +8,9 @@
 %    compY, compU et compV : YUV components of the image
 
 function [compY, compU, compV]=reverse_transform(dctY, dctU, dctV)
-    compY = idct2(dctY);
-    compU = idct2(dctU);
-    compV = idct2(dctV);
+    run('config.m');
+
+    compY = ibdct(dctY, [8,8], [HEIGHT WIDTH]);
+    compU = dctU;
+    compV = dctV;
 end

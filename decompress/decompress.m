@@ -6,7 +6,8 @@ function [decompY, decompU, decompV] = decompress(inputFile)
 
     for i = 1:NB_FRAME
         % Read the frame
-        [qY, qU, qV] = yuv_readimage(fid);
+        [qY, qU, qV] = read_bitstream(fid, 'int16');   
+        disp(size(qY));
 
         % Dequantization
         [dctY, dctU, dctV] = reverse_quantization(qY, qU, qV);
@@ -14,6 +15,8 @@ function [decompY, decompU, decompV] = decompress(inputFile)
         % Apply inverse DCT
         [decompY, decompU, decompV] = reverse_transform(dctY, dctU, dctV);
     end
+
+    assignin('base', 'qY', qY);
 
     % Close the file
     fclose(fid);

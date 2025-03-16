@@ -10,7 +10,7 @@
 function [qY, qU, qV] = read_bitstream(fid, type)
     arguments
         fid
-        type {mustBeMember(type, {'uint8', 'uint16'})} = 'uint8'
+        type {mustBeMember(type, {'int8', 'int16', 'int32'})} = 'int8'
     end
 
     run('config.m');

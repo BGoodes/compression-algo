@@ -12,7 +12,7 @@ function write_bitstream(fid, compY, compU, compV, type)
         compY
         compU
         compV
-        type {mustBeMember(type, {'uint8', 'uint16'})} = 'uint8'
+        type {mustBeMember(type, {'int8', 'int16', 'int32'})} = 'int8'
     end
 
     % Write the bitstream

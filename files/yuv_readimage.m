@@ -15,7 +15,7 @@
 function [compY,compU,compV]=yuv_readimage(fid, type)
     arguments
         fid
-        type {mustBeMember(type, {'uint8', 'uint16'})} = 'uint8'
+        type {mustBeMember(type, {'uint8', 'uint16', 'uint32'})} = 'uint8'
     end
 
     % Format
