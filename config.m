@@ -1,6 +1,6 @@
 % Parameters
 INPUT_FILE= "./media/news.qcif";
-OUTPUT_FILE = "test.mat";
+OUTPUT_FILE = "test.meh";
 
 WIDTH = 176;
 HEIGHT = 144;
