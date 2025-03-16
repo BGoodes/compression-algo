@@ -4,10 +4,17 @@
 % Inputs:
 %    compY, compU et compV : YUV components of the image
 %
-function yuv_writeimage(fid, compY, compU, compV)
+function yuv_writeimage(fid, compY, compU, compV, type)
+    arguments
+        fid
+        compY
+        compU
+        compV
+        type {mustBeMember(type, {'uint8', 'uint16'})} = 'uint8'
+    end
 
     % Write the components
-    fwrite(fid, compY', 'uint8');
-    fwrite(fid, compU, 'uint8');
-    fwrite(fid, compV, 'uint8');
+    fwrite(fid, compY', type);
+    fwrite(fid, compU, type);
+    fwrite(fid, compV, type);
 end
