@@ -1,8 +1,8 @@
 clear; 
 run('config.m');
 
-compress(INPUT_FILE, OUTPUT_FILE)
-[decompY, decompU, decompV]=decompress(OUTPUT_FILE);
+[compY, compU, compV] = compress(INPUT_FILE, OUTPUT_FILE);
+[decompY, decompU, decompV] = decompress(OUTPUT_FILE);
 
 compute_compression(INPUT_FILE, OUTPUT_FILE);
 

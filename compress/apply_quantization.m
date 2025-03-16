@@ -13,4 +13,9 @@ function [qY, qU, qV] = apply_quantization(dctY, dctU, dctV)
     qY = dctY;
     qU = dctU;
     qV = dctV;
+ 
+    % Remove last N lines
+    qY(N+1:end,:) = 0;
+    qU(N+1:end,:) = 0;
+    qV(N+1:end,:) = 0;
 end

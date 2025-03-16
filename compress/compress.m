@@ -16,7 +16,7 @@ function [qY, qU, qV] = compress(inputFile, outputFile)
         [qY, qU, qV] = apply_quantization(dctY, dctU, dctV);
         
         % Write the frame
-        write_bitstream(fidOut, dctY, dctU, dctV, 'int16');
+        write_bitstream(fidOut, qY, qU, qV, 'int16');
     end
 
     % Close the file
