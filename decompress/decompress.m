@@ -7,7 +7,6 @@ function [decompY, decompU, decompV] = decompress(inputFile)
     for i = 1:NB_FRAME
         % Read the frame
         [qY, qU, qV] = read_bitstream(fid, 'int16');   
-        disp(size(qY));
 
         % Dequantization
         [dctY, dctU, dctV] = reverse_quantization(qY, qU, qV);

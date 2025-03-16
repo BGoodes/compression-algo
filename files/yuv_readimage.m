@@ -12,19 +12,14 @@
 % fid = fopen('foreman.qcif','r');
 % [compY,compU,compV]=yuv_readimage(fid)
 
-function [compY,compU,compV]=yuv_readimage(fid, type)
-    arguments
-        fid
-        type {mustBeMember(type, {'uint8', 'uint16', 'uint32'})} = 'uint8'
-    end
-
+function [compY,compU,compV]=yuv_readimage(fid)
     % Format
     width = 176;
     height = 144;
     
     % Read the components
-    compY = fread(fid,[width height], type);
+    compY = fread(fid,[width height], 'uint8');
     compY = compY';
-    compU = fread(fid, [width/2 height/2], type);
-    compV = fread(fid, [width/2 height/2], type);
+    compU = fread(fid, [width/2 height/2], 'uint8');
+    compV = fread(fid, [width/2 height/2], 'uint8');
 end
