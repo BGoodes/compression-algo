@@ -1,12 +1,12 @@
 clear; 
 run('config.m');
 
-[compY, compU, compV] = compress(INPUT_FILE, OUTPUT_FILE);
-[decompY, decompU, decompV] = decompress(OUTPUT_FILE);
+compress(INPUT_FILE, COMPRESSED_FILE);
+% decompress(COMPRESSED_FILE, DECOMPRESSED_FILE);
 
-compute_compression(INPUT_FILE, OUTPUT_FILE);
+compute_compression(INPUT_FILE, COMPRESSED_FILE);
 
 % Display
-figure;
-imshow(uint8(decompY), []);
-title('Image récupérée du bitstream');
+% figure;
+% imshow(uint8(decompY), []);
+% title('Image récupérée du bitstream');

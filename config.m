@@ -1,6 +1,7 @@
 % Parameters
 INPUT_FILE= "./media/news.qcif";
-OUTPUT_FILE = "test.meh";
+COMPRESSED_FILE = "test.meh";
+DECOMPRESSED_FILE = "test.qcif";
 
 WIDTH = 176;
 HEIGHT = 144;
@@ -12,6 +13,6 @@ BLOCK_SIZE = 8;
 N = 18;
 
 % Constants
-NB_FRAME = 1;%dir(INPUT_FILE).bytes/(WIDTH*HEIGHT + WIDTH*HEIGHT/2);
+NB_FRAME = dir(INPUT_FILE).bytes/(WIDTH*HEIGHT + WIDTH*HEIGHT/2);
 BITSTREAM_WIDTH = BLOCK_SIZE^2;
 BITSTREAM_HEIGHT = WIDTH*HEIGHT/BLOCK_SIZE^2;

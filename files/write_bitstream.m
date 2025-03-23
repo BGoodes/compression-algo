@@ -3,20 +3,18 @@
 % Write the bitstream to a file
 % Inputs:
 %   fid : File id obtained from an fopen
-%   compY, compU, compV : YUV quantized components
-%   type : The type of the bitstream (default: uint8)
+%   encodedY, encodedY, encodedV : YUV encoded components
 %
-function write_bitstream(fid, compY, compU, compV, type)
-    arguments
-        fid
-        compY
-        compU
-        compV
-        type {mustBeMember(type, {'int8', 'int16', 'int32'})} = 'int8'
+function write_bitstream(fid, encodedY, encodedU, encodedV)
+    encodedComponents = {encodedY, encodedU, encodedV};
+    
+    for i = 1:3
+        encoded = encodedComponents{i};
+        
+        % Write the length of the encoded data
+        fwrite(fid, length(encoded), 'uint32');
+        
+        % Write the encoded data
+        fwrite(fid, encoded, 'ubit1');
     end
-
-    % Write the bitstream
-    fwrite(fid, compY', type);
-    fwrite(fid, compU, type);
-    fwrite(fid, compV, type);
 end

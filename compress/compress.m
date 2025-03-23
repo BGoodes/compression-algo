@@ -1,4 +1,4 @@
-function [qY, qU, qV] = compress(inputFile, outputFile)
+function compress(inputFile, outputFile)
     run('config.m');
 
     % Open the file
@@ -9,14 +9,13 @@ function [qY, qU, qV] = compress(inputFile, outputFile)
         % Read the frame
         [compY, compU, compV] = yuv_readimage(fidIn);
 
-        % Apply DCT
-        [dctY, dctU, dctV] = apply_transform(compY, compU, compV);
+        % Encode the frame
+        encodedY = entropy_encode(compY);
+        encodedU = entropy_encode(compU);
+        encodedV = entropy_encode(compV);
 
-        % Quantization
-        [qY, qU, qV] = apply_quantization(dctY, dctU, dctV);
-        
         % Write the frame
-        write_bitstream(fidOut, qY, qU, qV, 'int16');
+        write_bitstream(fidOut, encodedY, encodedU, encodedV);
     end
 
     % Close the file
