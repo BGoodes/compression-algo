@@ -1,4 +1,4 @@
-function dict = create_huffman_dict(inputFile)
+function dict = create_huffman_dict(inputFile, N)
     run('config.m');
 
     fidIn = fopen(inputFile, 'r');
@@ -8,7 +8,7 @@ function dict = create_huffman_dict(inputFile)
     for i = 1:NB_FRAME
         [compY, compU, compV] = yuv_readimage(fidIn);
         [dctY, dctU, dctV] = apply_dct(compY, compU, compV);
-        [qY, qU, qV] = apply_quantization(dctY, dctU, dctV);
+        [qY, qU, qV] = apply_quantization(dctY, dctU, dctV, N);
 
         allSymbols = [allSymbols; qY(:); qU(:); qV(:)];
     end

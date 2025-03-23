@@ -8,9 +8,9 @@
 % Outputs:
 %    qY, qU, qV : Quantized DCT coefficients
 
-function [qY, qU, qV] = apply_quantization(dctY, dctU, dctV)
+function [qY, qU, qV] = apply_quantization(dctY, dctU, dctV, N)
     run("config.m")
-    
+
     qY = round(dctY);
     qU = round(dctU);
     qV = round(dctV);

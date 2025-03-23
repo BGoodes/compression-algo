@@ -9,9 +9,6 @@ HEIGHT = 144;
 % DCT
 BLOCK_SIZE = 8;
 
-% QUANTIZATION
-N = 10;
-
 % Constants
 NB_FRAME = 1; %dir(INPUT_FILE).bytes/(WIDTH*HEIGHT + WIDTH*HEIGHT/2);
 

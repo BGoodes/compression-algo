@@ -1,9 +1,11 @@
 clear; 
 run('config.m');
 
-dict = create_huffman_dict(INPUT_FILE);
+N = 50;
 
-compress(INPUT_FILE, COMPRESSED_FILE, dict);
+dict = create_huffman_dict(INPUT_FILE, N);
+
+compress(INPUT_FILE, COMPRESSED_FILE, dict, N);
 decompress(COMPRESSED_FILE, DECOMPRESSED_FILE, dict);
 
 compute_compression(INPUT_FILE, COMPRESSED_FILE);
