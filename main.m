@@ -1,8 +1,8 @@
 clear; 
 run('config.m');
 
-N = 64;
-L = 50;
+N = 35;
+L = 10;
 
 dict = create_huffman_dict(INPUT_FILE, N, L);
 
