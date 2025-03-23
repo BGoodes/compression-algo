@@ -7,10 +7,10 @@
 % Outputs:
 %    dctY, dctU, dctV : DCT of the YUV components
 %
-function [dctY, dctU, dctV] = apply_dequantization(qY, qU, qV)
+function [dctY, dctU, dctV] = apply_dequantization(qY, qU, qV, L)
     run('config.m');
     
-    dctY = qY;
-    dctU = qU;
-    dctV = qV;
+    dctY = qY * L;
+    dctU = qU * L;
+    dctV = qV * L;
 end

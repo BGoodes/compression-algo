@@ -8,12 +8,12 @@
 % Outputs:
 %    qY, qU, qV : Quantized DCT coefficients
 
-function [qY, qU, qV] = apply_quantization(dctY, dctU, dctV, N)
+function [qY, qU, qV] = apply_quantization(dctY, dctU, dctV, N, L)
     run("config.m")
 
-    qY = round(dctY);
-    qU = round(dctU);
-    qV = round(dctV);
+    qY = round(dctY / L);
+    qU = round(dctU / L);
+    qV = round(dctV / L);
 
     % Remove last N lines
     qY(N+1:end,:) = 0;

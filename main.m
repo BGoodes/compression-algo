@@ -1,12 +1,13 @@
 clear; 
 run('config.m');
 
-N = 50;
+N = 64;
+L = 50;
 
-dict = create_huffman_dict(INPUT_FILE, N);
+dict = create_huffman_dict(INPUT_FILE, N, L);
 
-compress(INPUT_FILE, COMPRESSED_FILE, dict, N);
-decompress(COMPRESSED_FILE, DECOMPRESSED_FILE, dict);
+compress(INPUT_FILE, COMPRESSED_FILE, dict, N, L);
+decompress(COMPRESSED_FILE, DECOMPRESSED_FILE, dict, L);
 
 compute_compression(INPUT_FILE, COMPRESSED_FILE);
 compute_average_psnr(INPUT_FILE, DECOMPRESSED_FILE);

@@ -4,6 +4,9 @@ clear;
 inputFolder = 'media/originals';
 outputFolder = 'media/generated';
 
+N = 64;
+L = 1;
+
 if ~exist(outputFolder, 'dir')
     mkdir(outputFolder);
 end
@@ -20,7 +23,7 @@ for i = 1:length(files)
     outputFile = fullfile(outputFolder, name + "_compressed.meh");
 
     fprintf("Compressing %s\n", inputFile);
-    dict = create_huffman_dict(inputFile);
+    dict = create_huffman_dict(inputFile, N, L);
     compress(inputFile, outputFile, dict);
     
     % Compute compression ratio and rate

@@ -1,10 +1,10 @@
 clear;
 run('config.m');
 
-N_values = [1, 10, 20, 30, 40, 50];
-L = 1;
+L_values = [1, 4, 16, 32, 64, 128];
+N = 64;
 
-num_images = length(N_values);
+num_images = length(L_values);
 num_cols = ceil(sqrt(num_images));
 num_rows = ceil(num_images / num_cols);
 
@@ -14,14 +14,14 @@ set(gcf, 'Position', [100, 100, 800, 600]);
 t = tiledlayout(num_rows, num_cols, 'TileSpacing', 'compact', 'Padding', 'compact');
 
 for i = 1:num_images
-    N = N_values(i);
+    L = L_values(i);
     
     dict = create_huffman_dict(INPUT_FILE, N, L);
     compress(INPUT_FILE, COMPRESSED_FILE, dict, N, L);
     decompress(COMPRESSED_FILE, DECOMPRESSED_FILE, dict, L);
 
     psnr_val = compute_average_psnr(INPUT_FILE, DECOMPRESSED_FILE);
-    fprintf('N = %d, PSNR = %.2f dB\n', N, psnr_val);
+    fprintf('L = %d, PSNR = %.2f dB\n', L, psnr_val);
 
     fidOut = fopen(DECOMPRESSED_FILE, 'r');
     [compY_decomp, ~, ~] = yuv_readimage(fidOut);
@@ -29,5 +29,5 @@ for i = 1:num_images
 
     nexttile;
     imshow(uint8(compY_decomp), []);
-    title(sprintf('N = %d\nPSNR = %.2f dB', N, psnr_val), 'FontSize', 10);
+    title(sprintf('L = %d\nPSNR = %.2f dB', L, psnr_val), 'FontSize', 10);
 end

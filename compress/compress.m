@@ -1,4 +1,4 @@
-function compress(inputFile, outputFile, dict, N)
+function compress(inputFile, outputFile, dict, N, L)
     run('config.m');
 
     % Open the file
@@ -13,7 +13,7 @@ function compress(inputFile, outputFile, dict, N)
         [dctY, dctU, dctV] = apply_dct(compY, compU, compV);
 
         % Apply quantization
-        [qY, qU, qV] = apply_quantization(dctY, dctU, dctV, N);
+        [qY, qU, qV] = apply_quantization(dctY, dctU, dctV, N, L);
 
         % Encode the frame
         encodedY = entropy_encode(qY, dict);

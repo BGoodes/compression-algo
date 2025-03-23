@@ -1,4 +1,4 @@
-function decompress(inputFile, outputFile, dict)
+function decompress(inputFile, outputFile, dict, L)
     run('config.m');
 
     % Open the files
@@ -15,7 +15,7 @@ function decompress(inputFile, outputFile, dict)
         qV = entropy_decode(encodedV, DCT_WIDTH, DCT_HEIGHT_UV, dict);
 
         % Apply dequantization
-        [dctY, dctU, dctV] = apply_dequantization(qY, qU, qV);
+        [dctY, dctU, dctV] = apply_dequantization(qY, qU, qV, L);
 
         % Apply inverse DCT
         [compY, compU, compV] = apply_idct(dctY, dctU, dctV);
