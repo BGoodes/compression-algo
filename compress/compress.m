@@ -1,4 +1,4 @@
-function compress(inputFile, outputFile)
+function compress(inputFile, outputFile, dict)
     run('config.m');
 
     % Open the file
@@ -10,9 +10,9 @@ function compress(inputFile, outputFile)
         [compY, compU, compV] = yuv_readimage(fidIn);
 
         % Encode the frame
-        encodedY = entropy_encode(compY);
-        encodedU = entropy_encode(compU);
-        encodedV = entropy_encode(compV);
+        encodedY = entropy_encode(compY, dict);
+        encodedU = entropy_encode(compU, dict);
+        encodedV = entropy_encode(compV, dict);
 
         % Write the frame
         write_bitstream(fidOut, encodedY, encodedU, encodedV);

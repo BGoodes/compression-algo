@@ -1,4 +1,4 @@
-function decompress(inputFile, outputFile)
+function decompress(inputFile, outputFile, dict)
     run('config.m');
 
     % Open the files
@@ -10,14 +10,14 @@ function decompress(inputFile, outputFile)
         [encodedY, encodedU, encodedV] = read_bitstream(fidIn);
 
         % Decode the frame
-        % decodedY = entropy_decode(encodedY, HEIGHT, WIDTH);
-        % decodedU = entropy_decode(encodedU, HEIGHT/2, WIDTH/2);
-        % decodedV = entropy_decode(encodedV, HEIGHT/2, WIDTH/2);
+        decodedY = entropy_decode(encodedY, HEIGHT, WIDTH, dict);
+        decodedU = entropy_decode(encodedU, HEIGHT/2, WIDTH/2, dict);
+        decodedV = entropy_decode(encodedV, HEIGHT/2, WIDTH/2, dict);
 
         % Write the decompressed frame
-        fwrite(fidOut, encodedY', 'uint8');
-        fwrite(fidOut, encodedU, 'uint8');
-        fwrite(fidOut, encodedV, 'uint8');
+        fwrite(fidOut, decodedY', 'uint8');
+        fwrite(fidOut, decodedU, 'uint8');
+        fwrite(fidOut, decodedV, 'uint8');
     end
 
     % Close the files
