@@ -6,15 +6,15 @@
 %   encodedY, encodedY, encodedV : YUV encoded components
 %
 function write_bitstream(fid, encodedY, encodedU, encodedV)
-    encodedComponents = {encodedY, encodedU, encodedV};
+    write_component(fid, encodedY);
+    write_component(fid, encodedU);
+    write_component(fid, encodedV);
+end
+
+function write_component(fid, encoded)
+    % Write the length of the encoded data
+    fwrite(fid, length(encoded), 'uint32');
     
-    for i = 1:3
-        encoded = encodedComponents{i};
-        
-        % Write the length of the encoded data
-        fwrite(fid, length(encoded), 'uint32');
-        
-        % Write the encoded data
-        fwrite(fid, encoded, 'ubit1');
-    end
+    % Write the encoded data
+    fwrite(fid, encoded, 'ubit1');
 end
