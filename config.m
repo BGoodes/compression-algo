@@ -1,6 +1,6 @@
 % Parameters
-INPUT_FILE= "./media/news.qcif";
-COMPRESSED_FILE = "test.meh";
+INPUT_FILE= "./media/originals//news.qcif";
+COMPRESSED_FILE = "media/generated/test.meh";
 DECOMPRESSED_FILE = "test.qcif";
 
 WIDTH = 176;
