@@ -7,7 +7,10 @@ function dict = create_huffman_dict(inputFile)
 
     for i = 1:NB_FRAME
         [compY, compU, compV] = yuv_readimage(fidIn);
-        allSymbols = [allSymbols; compY(:); compU(:); compV(:)];
+        [dctY, dctU, dctV] = apply_dct(compY, compU, compV);
+        [qY, qU, qV] = apply_quantization(dctY, dctU, dctV);
+
+        allSymbols = [allSymbols; qY(:); qU(:); qV(:)];
     end
     
     fclose(fidIn);

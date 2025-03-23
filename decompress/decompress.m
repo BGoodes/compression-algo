@@ -10,14 +10,20 @@ function decompress(inputFile, outputFile, dict)
         [encodedY, encodedU, encodedV] = read_bitstream(fidIn);
 
         % Decode the frame
-        decodedY = entropy_decode(encodedY, HEIGHT, WIDTH, dict);
-        decodedU = entropy_decode(encodedU, HEIGHT/2, WIDTH/2, dict);
-        decodedV = entropy_decode(encodedV, HEIGHT/2, WIDTH/2, dict);
+        qY = entropy_decode(encodedY, DCT_WIDTH, DCT_HEIGHT_Y, dict);
+        qU = entropy_decode(encodedU, DCT_WIDTH, DCT_HEIGHT_UV, dict);
+        qV = entropy_decode(encodedV, DCT_WIDTH, DCT_HEIGHT_UV, dict);
+
+        % Apply dequantization
+        [dctY, dctU, dctV] = apply_dequantization(qY, qU, qV);
+
+        % Apply inverse DCT
+        [compY, compU, compV] = apply_idct(dctY, dctU, dctV);
 
         % Write the decompressed frame
-        fwrite(fidOut, decodedY', 'uint8');
-        fwrite(fidOut, decodedU, 'uint8');
-        fwrite(fidOut, decodedV, 'uint8');
+        fwrite(fidOut, compY', 'uint8');
+        fwrite(fidOut, compU, 'uint8');
+        fwrite(fidOut, compV, 'uint8');
     end
 
     % Close the files

@@ -17,7 +17,7 @@ for i = 1:length(files)
 
     inputFile = fullfile(inputFolder, files(i).name);
     [~, name, ~] = fileparts(files(i).name);
-    outputFile = fullfile(outputFolder, name + "_compressed.qcif");
+    outputFile = fullfile(outputFolder, name + "_compressed.meh");
 
     fprintf("Compressing %s\n", inputFile);
     dict = create_huffman_dict(inputFile);

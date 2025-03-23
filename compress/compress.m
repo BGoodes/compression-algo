@@ -9,10 +9,24 @@ function compress(inputFile, outputFile, dict)
         % Read the frame
         [compY, compU, compV] = yuv_readimage(fidIn);
 
+        % Apply DCT
+        [dctY, dctU, dctV] = apply_dct(compY, compU, compV);
+
+        % Apply quantization
+        [qY, qU, qV] = apply_quantization(dctY, dctU, dctV);
+
+        assignin('base', 'dctY', dctY);
+        assignin('base', 'dctU', dctU);
+        assignin('base', 'dctV', dctV);
+
+        assignin('base', 'qY', qY);
+        assignin('base', 'qU', qU);
+        assignin('base', 'qV', qV);
+
         % Encode the frame
-        encodedY = entropy_encode(compY, dict);
-        encodedU = entropy_encode(compU, dict);
-        encodedV = entropy_encode(compV, dict);
+        encodedY = entropy_encode(qY, dict);
+        encodedU = entropy_encode(qU, dict);
+        encodedV = entropy_encode(qV, dict);
 
         % Write the frame
         write_bitstream(fidOut, encodedY, encodedU, encodedV);
