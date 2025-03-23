@@ -15,14 +15,6 @@ function compress(inputFile, outputFile, dict)
         % Apply quantization
         [qY, qU, qV] = apply_quantization(dctY, dctU, dctV);
 
-        assignin('base', 'dctY', dctY);
-        assignin('base', 'dctU', dctU);
-        assignin('base', 'dctV', dctV);
-
-        assignin('base', 'qY', qY);
-        assignin('base', 'qU', qU);
-        assignin('base', 'qV', qV);
-
         % Encode the frame
         encodedY = entropy_encode(qY, dict);
         encodedU = entropy_encode(qU, dict);
