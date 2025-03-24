@@ -16,7 +16,10 @@ function decompress(inputFile, outputFile, dict, L)
         [dctY, dctU, dctV] = apply_dequantization(qY, qU, qV, L);
 
         % Apply inverse DCT
-        [compY, compU, compV] = apply_idct(dctY, dctU, dctV);
+        [centeredY, centeredU, centeredV] = apply_idct(dctY, dctU, dctV);
+
+        % Decenter
+        % [compY, compU, compV] = decenter(centeredY, centeredU, centeredV);
 
         % Write the decompressed frame
         fwrite(fidOut, compY', 'uint8');

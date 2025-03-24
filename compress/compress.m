@@ -9,8 +9,11 @@ function compress(inputFile, outputFile, dict, N, L)
         % Read the frame
         [compY, compU, compV] = yuv_readimage(fidIn);
 
+        % Center
+        [centeredY, centeredU, centeredV] = center(compY, compU, compV);
+
         % Apply DCT
-        [dctY, dctU, dctV] = apply_dct(compY, compU, compV);
+        [dctY, dctU, dctV] = apply_dct(centeredY, centeredU, centeredV);
 
         % Apply quantization
         [qY, qU, qV] = apply_quantization(dctY, dctU, dctV, N, L);
