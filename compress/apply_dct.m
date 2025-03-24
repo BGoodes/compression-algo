@@ -6,7 +6,7 @@
 %
 % Outputs:
 %    dctY, dctU et dctV : DCT of the YUV components
-
+%
 function [dctY, dctU, dctV] = apply_dct(compY, compU, compV)
     dctY = bdct(compY, [8,8]);
     dctU = bdct(compU, [8,8]);

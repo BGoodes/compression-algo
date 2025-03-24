@@ -1,20 +1,16 @@
-% function decoded = entropy_decode(encoded, height, width, dict)
+% function [qY, qU, qV]  = entropy_decode(encodedY, encodedU, encodedV, dict)
 %
-% Perform entropy decoding on a component using Huffman coding
+% Perform entropy decoding on Y, U, and V components using Huffman coding.
 % Inputs:
-%   encoded : Huffman encoded bitstream
-%   height : Height of the component
-%   width : Width of the component
-%   dict : Huffman dictionary
+%   encodedY, encodedU, encodedV : Huffman encoded bitstreams
+%   dict                         : Huffman dictionary
 %
 % Outputs:
-%   decoded : Huffman decoded component
+%   qY, qU, qV : Quantized YUV components
 %
-function decoded = entropy_decode(encoded, height, width, dict)
-    
-    % Decode the bitstream
-    decoded = huffmandeco(encoded, dict);
-    
-    % Reshape the decoded component
-    decoded = reshape(decoded, [height, width]);
+function [qY, qU, qV] = entropy_decode(encodedY, encodedU, encodedV, dict)
+    run('config.m');
+    qY = reshape(huffmandeco(encodedY, dict), [DCT_WIDTH, DCT_HEIGHT_Y]);
+    qU = reshape(huffmandeco(encodedU, dict), [DCT_WIDTH, DCT_HEIGHT_UV]);
+    qV = reshape(huffmandeco(encodedV, dict), [DCT_WIDTH, DCT_HEIGHT_UV]);
 end

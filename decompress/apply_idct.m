@@ -6,7 +6,7 @@
 %
 % Outputs:
 %    compY, compU et compV : YUV components of the image
-
+%
 function [compY, compU, compV] = apply_idct(dctY, dctU, dctV)
     run('config.m');
 

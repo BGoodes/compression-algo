@@ -1,15 +1,15 @@
-% function encoded = entropy_encode(comp)
+% function [encodedY, encodedU, encodedV] = entropy_encode(qY, qU, qV, dict)
 %
-% Perform entropy encoding on a component using Huffman coding
+% Perform entropy encoding on Y, U, and V components using Huffman coding.
 % Inputs:
-%   comp : Y, U, or V component
+%   qY, qU, qV  : Quantized YUV components
+%   dict        : Huffman dictionary
 %
 % Outputs:
-%   encoded : Huffman encoded bitstream
-
-function encoded = entropy_encode(comp, dict)
-    % Reshape the component into a vector
-    comp = comp(:);
-    
-    encoded = huffmanenco(comp, dict);
+%   encodedY, encodedU, encodedV : Huffman encoded bitstreams
+%
+function [encodedY, encodedU, encodedV] = entropy_encode(qY, qU, qV, dict)
+    encodedY = huffmanenco(qY(:), dict);
+    encodedU = huffmanenco(qU(:), dict);
+    encodedV = huffmanenco(qV(:), dict);
 end

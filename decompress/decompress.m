@@ -10,9 +10,7 @@ function decompress(inputFile, outputFile, dict, L)
         [encodedY, encodedU, encodedV] = read_bitstream(fidIn);
 
         % Decode the frame
-        qY = entropy_decode(encodedY, DCT_WIDTH, DCT_HEIGHT_Y, dict);
-        qU = entropy_decode(encodedU, DCT_WIDTH, DCT_HEIGHT_UV, dict);
-        qV = entropy_decode(encodedV, DCT_WIDTH, DCT_HEIGHT_UV, dict);
+        [qY, qU, qV] = entropy_decode(encodedY, encodedU, encodedV, dict);
 
         % Apply dequantization
         [dctY, dctU, dctV] = apply_dequantization(qY, qU, qV, L);

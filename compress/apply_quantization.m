@@ -7,7 +7,7 @@
 %
 % Outputs:
 %    qY, qU, qV : Quantized DCT coefficients
-
+%
 function [qY, qU, qV] = apply_quantization(dctY, dctU, dctV, N, L)
     run("config.m")
 

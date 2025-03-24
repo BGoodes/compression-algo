@@ -16,9 +16,7 @@ function compress(inputFile, outputFile, dict, N, L)
         [qY, qU, qV] = apply_quantization(dctY, dctU, dctV, N, L);
 
         % Encode the frame
-        encodedY = entropy_encode(qY, dict);
-        encodedU = entropy_encode(qU, dict);
-        encodedV = entropy_encode(qV, dict);
+        [encodedY, encodedU, encodedV] = entropy_encode(qY, qU, qV, dict);
 
         % Write the frame
         write_bitstream(fidOut, encodedY, encodedU, encodedV);
