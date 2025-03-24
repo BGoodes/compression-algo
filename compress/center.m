@@ -1,14 +1,14 @@
-% function [centeredY, centeredU, centeredV] = center(Y, U, V)
+% function [centeredY, centeredU, centeredV] = center(compY, compU, compV)
 % 
 % Center the Y, U, and V components
 % Input parameters:
-%    Y, U, V : YUV components
+%   compY, compU, compV : YUV components
 %
 % Output parameters:
 %    centeredY, centeredU, centeredV : Centered YUV components
 %
-function [centeredY, centeredU, centeredV] = center(Y, U, V)
-    centeredY = Y - 128;
-    centeredU = U - 128;
-    centeredV = V - 128;    
+function [centeredY, centeredU, centeredV] = center(compY, compU, compV)
+    centeredY = compY - 128;
+    centeredU = compU - 128;
+    centeredV = compV - 128;    
 end

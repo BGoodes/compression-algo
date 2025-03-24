@@ -19,7 +19,7 @@ function decompress(inputFile, outputFile, dict, L)
         [centeredY, centeredU, centeredV] = apply_idct(dctY, dctU, dctV);
 
         % Decenter
-        % [compY, compU, compV] = decenter(centeredY, centeredU, centeredV);
+        [compY, compU, compV] = decenter(centeredY, centeredU, centeredV);
 
         % Write the decompressed frame
         fwrite(fidOut, compY', 'uint8');
