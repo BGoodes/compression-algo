@@ -10,9 +10,12 @@ function decompress(inputFile, outputFile, dict, L)
         [encodedY, encodedU, encodedV] = read_bitstream(fidIn);
 
         % Decode the frame
-        [qY, qU, qV] = entropy_decode(encodedY, encodedU, encodedV, dict);
+        [rleY, rleU, rleV] = entropy_decode(encodedY, encodedU, encodedV, dict);
 
-        % Apply dequantization
+        % Decode RLE
+        [qY, qU, qV] = reverse_rle(rleY, rleU, rleV);
+
+        % Apply dequantization  
         [dctY, dctU, dctV] = apply_dequantization(qY, qU, qV, L);
 
         % Apply inverse DCT

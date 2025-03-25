@@ -10,8 +10,9 @@ function dict = create_huffman_dict(inputFile, N, L)
         [centeredY, centeredU, centeredV] = center(compY, compU, compV);
         [dctY, dctU, dctV] = apply_dct(centeredY, centeredU, centeredV);
         [qY, qU, qV] = apply_quantization(dctY, dctU, dctV, N, L);
+        [rleY, rleU, rleV] = apply_rle(qY, qU, qV);
 
-        allSymbols = [allSymbols; qY(:); qU(:); qV(:)];
+        allSymbols = [allSymbols; rleY(:); rleU(:); rleV(:)];
     end
     
     fclose(fidIn);

@@ -8,8 +8,8 @@
 % Outputs:
 %   encodedY, encodedU, encodedV : Huffman encoded bitstreams
 %
-function [encodedY, encodedU, encodedV] = entropy_encode(qY, qU, qV, dict)
-    encodedY = huffmanenco(qY(:), dict);
-    encodedU = huffmanenco(qU(:), dict);
-    encodedV = huffmanenco(qV(:), dict);
+function [encodedY, encodedU, encodedV] = entropy_encode(rleY, rleU, rleV, dict)
+    encodedY = huffmanenco(rleY, dict);
+    encodedU = huffmanenco(rleU, dict);
+    encodedV = huffmanenco(rleV, dict);
 end
