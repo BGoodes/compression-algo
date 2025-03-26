@@ -15,7 +15,7 @@ function decompress(inputFile, outputFile, dict, L)
         % Decode RLE
         [qY, qU, qV] = reverse_rle(rleY, rleU, rleV);
 
-        % Apply dequantization  
+        % Apply L dequantization
         [dctY, dctU, dctV] = apply_dequantization(qY, qU, qV, L);
 
         % Apply inverse DCT

@@ -1,14 +1,14 @@
-% function [dctY,dctU,dctV]=apply_dct(compY,compU,compV)
+% function [dctY, dctU, dctV]=apply_dct(centeredY, centeredU, centeredV)
 %
-% Computes the DCT of the YUV components
+% Computes the 8x8 DCT of the YUV components
 % Input:
-%    compY, compU et compV : YUV components of the image
+%    centeredY, centeredU et centeredV : YUV components centered
 %
 % Outputs:
 %    dctY, dctU et dctV : DCT of the YUV components
 %
-function [dctY, dctU, dctV] = apply_dct(compY, compU, compV)
-    dctY = bdct(compY, [8,8]);
-    dctU = bdct(compU, [8,8]);
-    dctV = bdct(compV, [8,8]);
+function [dctY, dctU, dctV] = apply_dct(centeredY, centeredU, centeredV)
+    dctY = bdct(centeredY, [8,8]);
+    dctU = bdct(centeredU, [8,8]);
+    dctV = bdct(centeredV, [8,8]);
 end

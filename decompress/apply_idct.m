@@ -1,16 +1,16 @@
-% function [compY, compU, compV]=apply_idct(dctY, dctU, dctV)
+% function [centeredY, centeredU, centeredV]=apply_idct(dctY, dctU, dctV)
 %
 % Computes the inverse DCT of the YUV components
 % Input:
 %    dctY, dctU et dctV : DCT of the YUV components
 %
 % Outputs:
-%    compY, compU et compV : YUV components of the image
+%    centeredY, centeredU et centeredV : YUV components centered
 %
-function [compY, compU, compV] = apply_idct(dctY, dctU, dctV)
+function [centeredY, centeredU, centeredV] = apply_idct(dctY, dctU, dctV)
     run('config.m');
 
-    compY = ibdct(dctY, [8,8], [HEIGHT WIDTH]);
-    compU = dctU;
-    compV = dctV;
+    centeredY = ibdct(dctY, [8,8], [HEIGHT WIDTH]);
+    centeredU = dctU;
+    centeredV = dctV;
 end

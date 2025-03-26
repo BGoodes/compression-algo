@@ -12,10 +12,10 @@ function compress(inputFile, outputFile, dict, N, L)
         % Center
         [centeredY, centeredU, centeredV] = center(compY, compU, compV);
 
-        % Apply DCT
+        % Apply DCT 8x8
         [dctY, dctU, dctV] = apply_dct(centeredY, centeredU, centeredV);
 
-        % Apply quantization
+        % Apply L quantization & N decimation
         [qY, qU, qV] = apply_quantization(dctY, dctU, dctV, N, L);
 
         % Apply RLE
