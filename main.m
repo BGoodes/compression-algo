@@ -17,7 +17,6 @@ refU = zeros(HEIGHT / 2, WIDTH / 2);
 refV = zeros(HEIGHT / 2, WIDTH / 2);
 
 for i = 1:NB_FRAME
-    disp(i)
     if mod(i-1, S) == 0 % I frame
         [compY, compU, compV] = compress_frame(fidIn, fidOut, dictI, N, L);
     else % P frame
@@ -32,6 +31,7 @@ end
 fclose(fidIn);
 fclose(fidOut);
 
+disp("Compression done");
 disp("------------------");
 
 % Decompression
@@ -43,7 +43,6 @@ refU = zeros(HEIGHT / 2, WIDTH / 2);
 refV = zeros(HEIGHT / 2, WIDTH / 2);
 
 for i = 1:NB_FRAME
-    disp(i)
     if mod(i-1, S) == 0 % I frame
         [compY, compU, compV] = decompress_frame(fidIn, fidOut, dictI, L);
     else % P frame
@@ -57,6 +56,9 @@ end
 
 fclose(fidIn);
 fclose(fidOut);
+
+disp("Decompression done");
+disp("------------------");
 
 compute_compression(INPUT_FILE, COMPRESSED_FILE);
 % compute_average_psnr(INPUT_FILE, DECOMPRESSED_FILE);
