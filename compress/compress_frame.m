@@ -1,4 +1,4 @@
-function compress_frame(fidIn, fidOut, dict, N, L)
+function [compY, compU, compV] = compress_frame(fidIn, fidOut, dict, N, L)
     run('config.m');
     
     % Read the frame

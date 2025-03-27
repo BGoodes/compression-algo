@@ -1,4 +1,4 @@
-function decompress_frame(fidIn, fidOut, dict, L)
+function [compY, compU, compV] = decompress_frame(fidIn, fidOut, dict, L)
     run('config.m');
 
     % Read the encoded frame (Y, U, V)
@@ -10,6 +10,10 @@ function decompress_frame(fidIn, fidOut, dict, L)
     % Decode RLE
     [qY, qU, qV] = reverse_rle(rleY, rleU, rleV);
 
+    qY = reshape(qY, [DCT_WIDTH, DCT_HEIGHT_Y]);
+    qU = reshape(qU, [DCT_WIDTH, DCT_HEIGHT_UV]);
+    qV = reshape(qV, [DCT_WIDTH, DCT_HEIGHT_UV]);
+    
     % Apply L dequantization
     [dctY, dctU, dctV] = apply_dequantization(qY, qU, qV, L);
 

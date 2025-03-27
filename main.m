@@ -4,33 +4,62 @@ run('config.m');
 % Parameters
 N = 35;
 L = 10;
+S = 2; % Number of P images between 2 I images
 
 % Compression
 fidIn = fopen(INPUT_FILE, 'r');
 fidOut = fopen(COMPRESSED_FILE, 'w');
 
-dict = create_huffman_dict(INPUT_FILE, N, L);
+[dictI, dictP] = create_huffman_dict(INPUT_FILE, N, L);
+
+refY = zeros(HEIGHT, WIDTH);
+refU = zeros(HEIGHT / 2, WIDTH / 2);
+refV = zeros(HEIGHT / 2, WIDTH / 2);
 
 for i = 1:NB_FRAME
-    compress_frame(fidIn, fidOut, dict, N, L);
+    disp(i)
+    if mod(i-1, S) == 0 % I frame
+        [compY, compU, compV] = compress_frame(fidIn, fidOut, dictI, N, L);
+    else % P frame
+        [compY, compU, compV] = predict_frame(fidIn, fidOut, refY, refU, refV, dictP);
+    end
+
+    refY = compY;
+    refU = compU;
+    refV = compV;
 end
 
 fclose(fidIn);
 fclose(fidOut);
 
+disp("------------------");
+
 % Decompression
 fidIn = fopen(COMPRESSED_FILE, 'r');
 fidOut = fopen(DECOMPRESSED_FILE, 'w');
 
+refY = zeros(HEIGHT, WIDTH);
+refU = zeros(HEIGHT / 2, WIDTH / 2);
+refV = zeros(HEIGHT / 2, WIDTH / 2);
+
 for i = 1:NB_FRAME
-    decompress_frame(fidIn, fidOut, dict, L);
+    disp(i)
+    if mod(i-1, S) == 0 % I frame
+        [compY, compU, compV] = decompress_frame(fidIn, fidOut, dictI, L);
+    else % P frame
+        [compY, compU, compV] = reconstruct_frame(fidIn, fidOut, refY, refU, refV, dictP);
+    end
+    
+    refY = compY;
+    refU = compU;
+    refV = compV;
 end
 
 fclose(fidIn);
 fclose(fidOut);
 
 compute_compression(INPUT_FILE, COMPRESSED_FILE);
-compute_average_psnr(INPUT_FILE, DECOMPRESSED_FILE);
+% compute_average_psnr(INPUT_FILE, DECOMPRESSED_FILE);
 
 [compY1, compU1, compV1] = yuv_readimage(fopen(INPUT_FILE, 'r'));
 [compY2, compU2, compV2] = yuv_readimage(fopen(DECOMPRESSED_FILE, 'r'));

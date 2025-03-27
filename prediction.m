@@ -21,10 +21,10 @@ imagesOrig = cell(1, S);
 imagesPred = cell(1, S);
 
 for i = 1:S
-    [compY1, ~, ~] = yuv_readimage(fidIn);
-    [compY2, ~, ~] = yuv_readimage(fidIn);
+    [compY1, compU1, ~] = yuv_readimage(fidIn);
+    [compY2, compU2, ~] = yuv_readimage(fidIn);
     
-    [motionVect, ~] = motionEstES(compY1, compY2, mbSize, p);
+    [motionVect, ~] = motionEstDS(compU1, compY2, mbSize, p);
     imgComp = motionComp(compY1, motionVect, mbSize);
     
     imagesOrig{i} = compY2;

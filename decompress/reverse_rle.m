@@ -9,9 +9,9 @@
 %
 function [qY, qU, qV] = reverse_rle(rleY, rleU, rleV)
     run("config.m");
-    qY = reshape(rle_decode(rleY), [DCT_WIDTH, DCT_HEIGHT_Y]);
-    qU = reshape(rle_decode(rleU), [DCT_WIDTH, DCT_HEIGHT_UV]);
-    qV = reshape(rle_decode(rleV), [DCT_WIDTH, DCT_HEIGHT_UV]);
+    qY = rle_decode(rleY);
+    qU = rle_decode(rleU);
+    qV = rle_decode(rleV);
 end
 
 % Run-Length Decoding (RLE) function
