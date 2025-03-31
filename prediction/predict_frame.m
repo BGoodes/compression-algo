@@ -1,8 +1,5 @@
-function [compY, compU, compV] = predict_frame(fidIn, fidOut, refY, refU, refV, dictP)
+function predict_frame(compY, compU, compV, fidOut, refY, refU, refV, dictP)
     run('config.m');
-
-    % Read the current frame
-    [compY, compU, compV] = yuv_readimage(fidIn);
     
     % Motion estimation
     [motionVectY, ~] = motionEstDS(refY, compY, MB_SIZE, P);
@@ -10,5 +7,5 @@ function [compY, compU, compV] = predict_frame(fidIn, fidOut, refY, refU, refV, 
     [motionVectV, ~] = motionEstDS(refV, compV, MB_SIZE/2, P);
     
     % Write to output file
-    write_bitstream(fidOut, motionVectY(:), motionVectU(:), motionVectV(:));
+    write_bitstream(fidOut, motionVectY(:)', motionVectU(:)', motionVectV(:)');
 end

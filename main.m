@@ -4,7 +4,7 @@ run('config.m');
 % Parameters
 N = 35;
 L = 10;
-S = 2; % Number of P images between 2 I images
+S = 2; % Number of P images between 2 I images (don't work when S>2)
 
 % Compression
 fidIn = fopen(INPUT_FILE, 'r');
@@ -17,10 +17,12 @@ refU = zeros(HEIGHT / 2, WIDTH / 2);
 refV = zeros(HEIGHT / 2, WIDTH / 2);
 
 for i = 1:NB_FRAME
+    [compY, compU, compV] = yuv_readimage(fidIn);
+
     if mod(i-1, S) == 0 % I frame
-        [compY, compU, compV] = compress_frame(fidIn, fidOut, dictI, N, L);
+        compress_frame(compY, compU, compV, fidOut, dictI, N, L);
     else % P frame
-        [compY, compU, compV] = predict_frame(fidIn, fidOut, refY, refU, refV, dictP);
+        predict_frame(compY, compU, compV, fidOut, refY, refU, refV, dictP);
     end
 
     refY = compY;

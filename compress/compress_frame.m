@@ -1,9 +1,6 @@
-function [compY, compU, compV] = compress_frame(fidIn, fidOut, dict, N, L)
+function compress_frame(compY, compU, compV, fidOut, dict, N, L)
     run('config.m');
     
-    % Read the frame
-    [compY, compU, compV] = yuv_readimage(fidIn);
-
     % Center
     [centeredY, centeredU, centeredV] = center(compY, compU, compV);
 
