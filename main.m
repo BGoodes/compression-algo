@@ -4,13 +4,13 @@ run('config.m');
 % Parameters
 N = 35;
 L = 10;
-S = 2; % Number of P images between 2 I images (don't work when S>2)
+S = 1; % Number of P images between 2 I images (don't work when S>2)
 
 % Compression
 fidIn = fopen(INPUT_FILE, 'r');
 fidOut = fopen(COMPRESSED_FILE, 'w');
 
-[dictI, dictP] = create_huffman_dict(INPUT_FILE, N, L);
+[dictI, dictP] = create_huffman_dict(INPUT_FILE, N, L); % dictP is unused
 
 refY = zeros(HEIGHT, WIDTH);
 refU = zeros(HEIGHT / 2, WIDTH / 2);
